@@ -102,6 +102,7 @@ namespace Chapter6
             };
 
             //6.2.1
+            Console.WriteLine("---問１---");
             var book = books.Where(b => b.Title == "ワンダフル・C#ライフ");
             foreach (var item in book)
             {
@@ -109,9 +110,45 @@ namespace Chapter6
             }
 
             //6.2.2
+            Console.WriteLine("---問２---");
             var book2 = books.Count(b => b.Title.Contains("C#"));
             Console.WriteLine($"{book2}冊");
 
+            //6.2.3
+            Console.WriteLine("---問３---");
+            var book3 = books.Where(b => b.Title.Contains("C#")).Average(b => b.Pages);
+            Console.WriteLine($"平均ページ数(C#を含む)：{book3}");
+
+            //6.2.4
+            Console.WriteLine("---問４---");
+            var book4 = books.Where(b => b.Price >= 4000).First();
+            if (book4 != null)
+            {
+                Console.WriteLine($"４０００円以上(最初のみ)：{book4.Title}");
+            }
+
+            //6.2.5
+            Console.WriteLine("---問５---");
+            Console.WriteLine($"４０００円未満の最大ページ数：{books.Where(b => b.Price < 4000).Max(b => b.Pages)}");
+
+            //6.2.6
+            Console.WriteLine("---問６---");
+            var book6 = books.Where(b => b.Pages >= 400).OrderByDescending(b => b.Price);
+            foreach (var item in book6)
+            {
+                Console.WriteLine($"{item.Title} {item.Price}");
+            }
+
+            //6.2.7
+            Console.WriteLine("---問７---");
+            var book7 = books.Where(b => b.Title.Contains("C#") && b.Pages <= 500);
+            if (book7 != null)
+            {
+                foreach (var item in book7)
+                {
+                    Console.WriteLine(item.Title);
+                }
+            }
         }
     }
 }
