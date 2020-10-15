@@ -92,7 +92,7 @@ namespace Chapter6
             //6.2
             var books = new List<Book>
             {
-                new Book { Title = "C#プログラミングの新常識", Price = 3800, Pages = 378 },
+                new Book { Title = "C#プログラミングの新常識 C#", Price = 3800, Pages = 378 },
                 new Book { Title = "ラムダ式とLINQの極意", Price = 2500, Pages = 312 },
                 new Book { Title = "ワンダフル・C#ライフ", Price = 2900, Pages = 385 },
                 new Book { Title = "一人で学ぶ並列処理プログラミング", Price = 4800, Pages = 464 },
@@ -149,6 +149,21 @@ namespace Chapter6
                     Console.WriteLine(item.Title);
                 }
             }
+
+
+            var count = 0;
+
+            foreach (var book8 in books.Where(b => b.Title.Contains("C#")))
+            {
+                for (int i = 0; i < book8.Title.Length - 1; i++)
+                {
+                    if ((book8.Title[i] == 'C'&& book8.Title[i + 1] == '#'))
+                    {
+                        count++;
+                    }
+                }
+            }
+            Console.WriteLine($"C#の数：{count}");
         }
     }
 }
