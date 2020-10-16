@@ -9,8 +9,6 @@ namespace Chapter7
 {
     class Program
     {
-        static Dictionary<char,int> dict = new Dictionary<char,int>();
-
         public static void Main(string[] args)
         {
             #region 辞書登録プログラム
@@ -48,23 +46,67 @@ namespace Chapter7
 
 
             var text = "Cozy lummox gives smart squid who asks for job pen";
+            Console.WriteLine("---7.1.1---");
+            Exercise1_1(text);  //問題7.1.1
 
-            //7.1
+            Console.WriteLine("\n---7.1.2---");
+            Exercise1_2(text);  //問題7.1.2
+
+        }
+
+        private static void Exercise1_2(string text)
+        {
+            var dict = new SortedDictionary<char, int>();
+
             foreach (var ch in text.ToUpper())
             {
-                int count = 0;
+
                 if ('A' <= ch && ch <= 'Z')
                 {
-                    count++;
-                    
+                    if (dict.ContainsKey(ch))
+                    {
+                        dict[ch]++;
+                    }
+                    else
+                    {
+                        dict.Add(ch, 1);
+                    }
+
                 }
             }
             foreach (var item in dict)
             {
-                Console.WriteLine("{0} : {1}", dict, item);
+                Console.WriteLine($"{item.Key} : {item.Value}");
             }
         }
 
+        private static void Exercise1_1(string text)
+        {
+            var dict = new Dictionary<char, int>();
+
+            foreach (var ch in text.ToUpper())
+            {
+
+                if ('A' <= ch && ch <= 'Z')
+                {
+                    if (dict.ContainsKey(ch))
+                    {
+                        dict[ch]++;
+                    }
+                    else
+                    {
+                        dict.Add(ch,1);
+                    }
+
+                }
+            }
+            foreach (var item in dict.OrderBy(c => c.Key))
+            {
+                Console.WriteLine($"{item.Key} : {item.Value}");
+            }
+        }
+
+        #region 辞書登録プログラム
         //public static void DuplicateKey()
         //{
         //    // ディクショナリに追加
@@ -83,5 +125,6 @@ namespace Chapter7
         //    Console.WriteLine("登録しました！");
         //    Console.WriteLine();
         //}
+        #endregion
     }
 }
