@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SendMailApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="450" Width="500">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="件名：" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Row="1" Text="To：" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Row="2" Text="Cc：" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Row="3" Text="Bcc：" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Row="4" Text="本文：" VerticalAlignment="Top"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" VerticalAlignment="Center" />
+
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="okButton" Content="OK" Height="30" Width="75" Margin="2"/>
+            <Button x:Name="cancelButton" Content="Cancel" Height="30" Width="75" Margin="2"/>
+        </StackPanel>
     </Grid>
 </Window>
