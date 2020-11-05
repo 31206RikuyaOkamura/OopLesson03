@@ -51,23 +51,14 @@ namespace SendMailApp
 
                 msg.Subject = tbTirle.Text; //件名
                 msg.Body = tbBody.Text; //本文
+
                 if (tbCc.Text != "")
                 {
-                    string[] cc = tbCc.Text.Split(',');
-
-                    foreach (var item in cc)
-                    {
-                        msg.CC.Add(item);
-                    }
+                    msg.CC.Add(tbCc.Text);
                 }
                 if (tbBcc.Text != "")
                 {
-                    string[] bcc = tbBcc.Text.Split(',');
-
-                    foreach (var item in bcc)
-                    {
-                        msg.Bcc.Add(item);
-                    }
+                    msg.Bcc.Add(tbBcc.Text);
                 }
 
                 sc.Host = "smtp.gmail.com"; //SMTPサーバーの設定
@@ -82,7 +73,7 @@ namespace SendMailApp
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         //送信キャンセル処理
