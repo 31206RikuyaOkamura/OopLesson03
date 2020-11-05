@@ -62,7 +62,7 @@ namespace SendMailApp
                 }
                 if (tbBcc.Text != "")
                 {
-                    string[] bcc = tbCc.Text.Split(',');
+                    string[] bcc = tbBcc.Text.Split(',');
 
                     foreach (var item in bcc)
                     {
