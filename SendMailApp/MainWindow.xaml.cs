@@ -81,5 +81,20 @@ namespace SendMailApp
         {
             sc.SendAsyncCancel();
         }
+
+        //設定画面表示
+        private void btConfig_Click(object sender, RoutedEventArgs e)
+        {
+            //設定画面のインスタンスを生成
+            ConfigWindow configWindow = new ConfigWindow();
+            //表示
+            configWindow.ShowDialog();
+        }
+
+        //メインウィンドウがロードされるタイミングで呼び出される
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
