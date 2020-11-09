@@ -88,16 +88,23 @@ namespace SendMailApp
         //逆シリアル化
         public void DeSerialise()
         {
-            using (var reader = XmlReader.Create("Config.xml"))
+            try
             {
-                var serializer = new XmlSerializer(typeof(Config));
-                var cf = serializer.Deserialize(reader) as Config;
+                using (var reader = XmlReader.Create("Config.xml"))
+                {
+                    var serializer = new XmlSerializer(typeof(Config));
+                    var cf = serializer.Deserialize(reader) as Config;
 
-                Smtp = cf.Smtp;
-                MailAddress = cf.MailAddress;
-                PassWord = cf.PassWord;
-                Port = cf.Port;
-                Ssl = cf.Ssl;
+                    Smtp = cf.Smtp;
+                    MailAddress = cf.MailAddress;
+                    PassWord = cf.PassWord;
+                    Port = cf.Port;
+                    Ssl = cf.Ssl;
+                }
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Serialise();
             }
         }
     }
