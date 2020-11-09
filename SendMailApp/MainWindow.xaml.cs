@@ -47,7 +47,8 @@ namespace SendMailApp
         {
             try
             {
-                MailMessage msg = new MailMessage("ojsinfosys01@gmail.com", tbTo.Text);
+                Config cf = Config.GetInstance();
+                MailMessage msg = new MailMessage(cf.MailAddress, tbTo.Text);
 
                 msg.Subject = tbTirle.Text; //件名
                 msg.Body = tbBody.Text; //本文
@@ -61,10 +62,10 @@ namespace SendMailApp
                     msg.Bcc.Add(tbBcc.Text);
                 }
 
-                sc.Host = "smtp.gmail.com"; //SMTPサーバーの設定
-                sc.Port = 587;
-                sc.EnableSsl = true;
-                sc.Credentials = new NetworkCredential("ojsinfosys01@gmail.com", "ojsInfosys2020");
+                sc.Host = cf.Smtp; //SMTPサーバーの設定
+                sc.Port = cf.Port;
+                sc.EnableSsl = cf.Ssl;
+                sc.Credentials = new NetworkCredential(cf.MailAddress, cf.PassWord);
 
                 //sc.Send(msg); //送信
                 sc.SendMailAsync(msg);

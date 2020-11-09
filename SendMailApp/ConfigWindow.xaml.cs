@@ -24,6 +24,7 @@ namespace SendMailApp
             InitializeComponent();
         }
 
+        //初期値ボタン
         private void btDefalt_Click(object sender, RoutedEventArgs e)
         {
             Config cf = (Config.GetInstance()).getDefaultStatus();
@@ -39,12 +40,38 @@ namespace SendMailApp
         //適用（更新）
         private void btApply_Click(object sender, RoutedEventArgs e)
         {
+            //更新処理を呼び出す
             Config.GetInstance().UpdateStatus(
                 tbSmto.Text,
                 tbUserName.Text,
                 tbPassWord.Password,
                 int.Parse(tbPrto.Text),
                 CbSsl.IsChecked ?? false);
+        }
+
+        //OKボタン
+        private void btOk_Click(object sender, RoutedEventArgs e)
+        {
+            btApply_Click(sender,e);
+            this.Close();
+        }
+
+        //キャンセルボタン
+        private void btCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        //ロード時に一度だけ呼び出される
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Config cf = Config.GetInstance();
+
+            tbSmto.Text = cf.Smtp;
+            tbSender.Text = tbUserName.Text = cf.MailAddress;
+            tbPrto.Text = cf.Port.ToString();
+            tbPassWord.Password = cf.PassWord;
+            CbSsl.IsChecked = cf.Ssl;
         }
     }
 }
