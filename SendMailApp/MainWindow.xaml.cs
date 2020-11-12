@@ -86,6 +86,11 @@ namespace SendMailApp
         //設定画面表示
         private void btConfig_Click(object sender, RoutedEventArgs e)
         {
+            ConfigWindowShow();
+        }
+
+        private static void ConfigWindowShow()
+        {
             //設定画面のインスタンスを生成
             ConfigWindow configWindow = new ConfigWindow();
             //表示
@@ -101,7 +106,11 @@ namespace SendMailApp
             }
             catch (System.IO.FileNotFoundException)
             {
-                btConfig_Click(sender, e);
+                ConfigWindowShow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

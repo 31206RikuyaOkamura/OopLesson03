@@ -75,7 +75,30 @@ namespace SendMailApp
         //キャンセルボタン
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (updateCheck())
+            {
+                if (MessageBox.Show("変更が反映されていません\n移動しますか？", "確認", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                {
+                    this.Close();
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private bool updateCheck()
+        {
+            Config cf = Config.GetInstance();
+            if (tbSmto.Text != cf.Smtp || tbUserName.Text != cf.MailAddress || tbSender.Text != cf.MailAddress || tbPrto.Text != cf.Port.ToString() || tbPassWord.Password != cf.PassWord || CbSsl.IsChecked != cf.Ssl)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         //ロード時に一度だけ呼び出される
