@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -62,8 +64,8 @@ namespace SendMailApp
         }
 
         //設定データ更新
-        public bool UpdateStatus(string smtp,string mailAddress,string passWord,
-            int port,bool ssl) //仮引数
+        public bool UpdateStatus(string smtp, string mailAddress, string passWord,
+            int port, bool ssl) //仮引数
         {
             this.Smtp = smtp;
             this.MailAddress = mailAddress;
@@ -77,34 +79,20 @@ namespace SendMailApp
         //シリアル化
         public void Serialise()
         {
-            Config cf = Config.GetInstance();
             using (var writer = XmlWriter.Create("Config.xml"))
             {
-                var serializer = new XmlSerializer(cf.GetType());
-                serializer.Serialize(writer, cf);
+                var serializer = new XmlSerializer(instance.GetType());
+                serializer.Serialize(writer, instance);
             }
         }
 
         //逆シリアル化
         public void DeSerialise()
         {
-            try
+            using (var reader = XmlReader.Create("Config.xml"))
             {
-                using (var reader = XmlReader.Create("Config.xml"))
-                {
-                    var serializer = new XmlSerializer(typeof(Config));
-                    var cf = serializer.Deserialize(reader) as Config;
-
-                    Smtp = cf.Smtp;
-                    MailAddress = cf.MailAddress;
-                    PassWord = cf.PassWord;
-                    Port = cf.Port;
-                    Ssl = cf.Ssl;
-                }
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                Serialise();
+                var serializer = new XmlSerializer(typeof(Config));
+                instance = serializer.Deserialize(reader) as Config;
             }
         }
     }

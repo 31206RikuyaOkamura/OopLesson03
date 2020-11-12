@@ -40,20 +40,36 @@ namespace SendMailApp
         //適用（更新）
         private void btApply_Click(object sender, RoutedEventArgs e)
         {
-            //更新処理を呼び出す
-            Config.GetInstance().UpdateStatus(
-                tbSmto.Text,
-                tbUserName.Text,
-                tbPassWord.Password,
-                int.Parse(tbPrto.Text),
-                CbSsl.IsChecked ?? false);
+            update();
+        }
+
+        private bool update()
+        {
+            if (tbSmto.Text == "" || tbUserName.Text == "" || tbSender.Text == "" || tbPassWord.Password == "" || tbPrto.Text == "")
+            {
+                MessageBox.Show("正しい値を入力してください。", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            else
+            {
+                //更新処理を呼び出す
+                Config.GetInstance().UpdateStatus(
+                    tbSmto.Text,
+                    tbUserName.Text,
+                    tbPassWord.Password,
+                    int.Parse(tbPrto.Text),
+                    CbSsl.IsChecked ?? false);
+                return true;
+            }
         }
 
         //OKボタン
         private void btOk_Click(object sender, RoutedEventArgs e)
         {
-            btApply_Click(sender,e);
-            this.Close();
+            if (update())
+            {
+                this.Close();
+            }
         }
 
         //キャンセルボタン

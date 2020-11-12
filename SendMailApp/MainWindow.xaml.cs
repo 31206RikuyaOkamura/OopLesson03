@@ -95,13 +95,27 @@ namespace SendMailApp
         //メインウィンドウがロードされるタイミングで呼び出される
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Config.GetInstance().DeSerialise();
+            try
+            {
+                Config.GetInstance().DeSerialise();
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                btConfig_Click(sender, e);
+            }
         }
 
         //メインウィンドウが閉じるタイミングで呼び出される
         private void Window_Closed(object sender, EventArgs e)
         {
-            Config.GetInstance().Serialise();
+            try
+            {
+                Config.GetInstance().Serialise();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
