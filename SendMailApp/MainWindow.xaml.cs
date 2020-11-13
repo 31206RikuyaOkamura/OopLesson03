@@ -126,5 +126,10 @@ namespace SendMailApp
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void addFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
