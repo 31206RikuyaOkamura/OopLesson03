@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -129,7 +130,19 @@ namespace SendMailApp
 
         private void addFile_Click(object sender, RoutedEventArgs e)
         {
+            //オープンファイルダイアログを生成する
+            var op = new OpenFileDialog();
 
+            if (op.ShowDialog() == true)
+            {
+                //「開く」ボタンが選択された時の処理
+                rbFile.Items.Add(op.FileName);
+            }
+        }
+
+        private void deleteFile_Click(object sender, RoutedEventArgs e)
+        {
+            rbFile.Items.Clear();
         }
     }
 }
