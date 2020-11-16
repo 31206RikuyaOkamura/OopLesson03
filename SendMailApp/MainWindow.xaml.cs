@@ -74,8 +74,19 @@ namespace SendMailApp
                 sc.EnableSsl = cf.Ssl;
                 sc.Credentials = new NetworkCredential(cf.MailAddress, cf.PassWord);
 
-                //sc.Send(msg); //送信
-                sc.SendMailAsync(msg);
+                if (tbTirle.Text == "" || tbBody.Text == "")
+                {
+                    if (MessageBox.Show("件名または本文が入力されていません\n送信しますか？", "確認", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                    {
+                        sc.SendMailAsync(msg);
+                    }
+                }
+                else
+                {
+                    //sc.Send(msg); //送信
+                    sc.SendMailAsync(msg);
+                }
+                
             }
             catch (Exception ex)
             {
