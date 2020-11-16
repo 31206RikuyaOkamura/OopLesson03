@@ -62,13 +62,11 @@ namespace SendMailApp
                 {
                     msg.Bcc.Add(tbBcc.Text);
                 }
-                if (rbFile.Items != null)
+
+                foreach (var item in rbFile.Items)
                 {
-                    foreach (var item in rbFile.Items)
-                    {
-                        var attach = new System.Net.Mail.Attachment(item.ToString());
-                        msg.Attachments.Add(attach);
-                    }
+                    var attach = new System.Net.Mail.Attachment(item.ToString());
+                    msg.Attachments.Add(attach);
                 }
 
                 sc.Host = cf.Smtp; //SMTPサーバーの設定
